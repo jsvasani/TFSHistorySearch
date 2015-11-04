@@ -2,7 +2,7 @@
 // MUST match PkgCmdID.h
 using System;
 
-namespace NoName.TFSHistorySearch
+namespace TFSHistorySearch
 {
     static class PkgCmdIDList
     {

@@ -2,7 +2,7 @@
 // MUST match guids.h
 using System;
 
-namespace NoName.TFSHistorySearch
+namespace TFSHistorySearch
 {
     static class GuidList
     {
