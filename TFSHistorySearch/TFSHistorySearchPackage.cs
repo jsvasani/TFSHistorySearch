@@ -8,6 +8,10 @@ using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.OLE.Interop;
 using Microsoft.VisualStudio.Shell;
+using TfsHistorySearchUI;
+using EnvDTE80;
+using EnvDTE;
+using TfsHelperLib;
 
 namespace TFSHistorySearch
 {
@@ -78,22 +82,25 @@ namespace TFSHistorySearch
         /// </summary>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            // Show a Message Box to prove we were here
-            IVsUIShell uiShell = (IVsUIShell)GetService(typeof(SVsUIShell));
-            Guid clsid = Guid.Empty;
-            int result;
-            Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(uiShell.ShowMessageBox(
-                       0,
-                       ref clsid,
-                       "TFSHistorySearch",
-                       string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.ToString()),
-                       string.Empty,
-                       0,
-                       OLEMSGBUTTON.OLEMSGBUTTON_OK,
-                       OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
-                       OLEMSGICON.OLEMSGICON_INFO,
-                       0,        // false
-                       out result));
+            DTE2 dte = (DTE2)GetService(typeof(DTE));
+
+            TfsHistorySearchWinForm form = new TfsHistorySearchWinForm(new TfsHelper(dte));
+            //// Show a Message Box to prove we were here
+            //IVsUIShell uiShell = (IVsUIShell)GetService(typeof(SVsUIShell));
+            //Guid clsid = Guid.Empty;
+            //int result;
+            //Microsoft.VisualStudio.ErrorHandler.ThrowOnFailure(uiShell.ShowMessageBox(
+            //           0,
+            //           ref clsid,
+            //           "TFSHistorySearch",
+            //           string.Format(CultureInfo.CurrentCulture, "Inside {0}.MenuItemCallback()", this.ToString()),
+            //           string.Empty,
+            //           0,
+            //           OLEMSGBUTTON.OLEMSGBUTTON_OK,
+            //           OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
+            //           OLEMSGICON.OLEMSGICON_INFO,
+            //           0,        // false
+            //           out result));
         }
 
     }

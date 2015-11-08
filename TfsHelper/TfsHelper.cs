@@ -6,16 +6,20 @@ using Microsoft.VisualStudio.TeamFoundation.VersionControl;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
-namespace TfsHelper
+namespace TfsHelperLib
 {
     public class TfsHelper
     {
+        DTE2 _appObj;
         #region Public Methods
+
+        public TfsHelper(DTE2 appObj)
+        {
+            _appObj = appObj;
+        }
+
         /// <summary>
         /// Gets the server Uri and the path of the selected item
         /// </summary>
@@ -23,7 +27,19 @@ namespace TfsHelper
         /// <param name="serverUri">Server Uri</param>
         /// <param name="itemPath">Item path</param>
         /// <param name="isFolder">True if the selected item is a folder</param>
-        public static void GetServerUriAndItemPath(DTE2 appObj, out string serverUri, out string itemPath, out bool isFolder)
+        public void GetServerUriAndItemPath(out string serverUri, out string itemPath, out bool isFolder)
+        {
+            GetServerUriAndItemPath(_appObj, out serverUri, out itemPath, out isFolder);
+        }
+
+        /// <summary>
+        /// Gets the server Uri and the path of the selected item
+        /// </summary>
+        /// <param name="appObj">Application object</param>
+        /// <param name="serverUri">Server Uri</param>
+        /// <param name="itemPath">Item path</param>
+        /// <param name="isFolder">True if the selected item is a folder</param>
+        public void GetServerUriAndItemPath(DTE2 appObj, out string serverUri, out string itemPath, out bool isFolder)
         {
             if (appObj == null)
                 throw new ArgumentNullException("appObj");
@@ -133,27 +149,25 @@ namespace TfsHelper
         /// <param name="serverUri">Server Uri</param>
         /// <param name="itemPath">Item path</param>
         /// <returns>Changeset history</returns>
-        public static List<Changeset> GetHistory(string serverUri, string itemPath)
+        public static List<TfsChangeset> GetHistory(string serverUri, string itemPath)
         {
             if (String.IsNullOrWhiteSpace(serverUri))
                 throw new ArgumentException("'serverUri' is null or empty.");
             if (String.IsNullOrWhiteSpace(itemPath))
                 throw new ArgumentException("'itemPath' is null or empty.");
 
-            List<Changeset> currentHistory = new List<Changeset>();
+            List<TfsChangeset> currentHistory = new List<TfsChangeset>();
 
             IEnumerable currentHistoryEnumerator = FetchHistory(serverUri, itemPath);
             if (currentHistoryEnumerator != null)
             {
                 foreach (Changeset changeset in currentHistoryEnumerator)
                 {
-                    string[] fields = new string[] {
-                                        changeset.ChangesetId.ToString(),
-                                        changeset.Owner, 
-                                        changeset.CreationDate.ToString(), 
-                                        changeset.Comment
-                                        };
-                    currentHistory.Add(changeset);
+                    currentHistory.Add(new TfsChangeset() { 
+                        ChangesetId = changeset.ChangesetId, Owner = changeset.Owner, 
+                        CreationDate = changeset.CreationDate, Comment = changeset.Comment,
+                        Changes_0_ServerItem = changeset.Changes[0].Item.ServerItem 
+                    });
                 }
             }
             return currentHistory;

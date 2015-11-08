@@ -5,7 +5,7 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TFSHistorySearch", "TFSHistorySearch\TFSHistorySearch.csproj", "{A54099B1-ED3C-4621-86A4-F11A3968A3F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfsHelper", "TfsHelper\TfsHelper.csproj", "{1F6264C0-3106-4276-8B82-51B6925EC2C6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfsHelperLib", "TfsHelper\TfsHelperLib.csproj", "{1F6264C0-3106-4276-8B82-51B6925EC2C6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TfsHistorySearchUI", "TfsHistorySearchUI\TfsHistorySearchUI.csproj", "{21F003F0-0B18-4BFB-A35C-AA0CF4678C8A}"
 EndProject

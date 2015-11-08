@@ -163,6 +163,10 @@
     <Content Include="Resources\Package.ico" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\TfsHelper\TfsHelperLib.csproj">
+      <Project>{1f6264c0-3106-4276-8b82-51b6925ec2c6}</Project>
+      <Name>TfsHelperLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\TfsHistorySearchUI\TfsHistorySearchUI.csproj">
       <Project>{21f003f0-0b18-4bfb-a35c-aa0cf4678c8a}</Project>
       <Name>TfsHistorySearchUI</Name>
