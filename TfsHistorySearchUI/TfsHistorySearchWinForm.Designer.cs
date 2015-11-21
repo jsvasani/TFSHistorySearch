@@ -76,6 +76,7 @@
             this.columnHeader2,
             this.columnHeader3,
             this.columnHeader4});
+            this.listViewSearchResults.ContextMenuStrip = this.contextMenuResults;
             this.listViewSearchResults.FullRowSelect = true;
             this.listViewSearchResults.GridLines = true;
             this.listViewSearchResults.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
@@ -86,6 +87,7 @@
             this.listViewSearchResults.TabIndex = 41;
             this.listViewSearchResults.UseCompatibleStateImageBehavior = false;
             this.listViewSearchResults.View = System.Windows.Forms.View.Details;
+            this.listViewSearchResults.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listViewSearchResults_ItemSelectionChanged);
             // 
             // columnHeader1
             // 
@@ -195,18 +197,21 @@
             this.compareWithLatestVersionToolStripMenuItem.Name = "compareWithLatestVersionToolStripMenuItem";
             this.compareWithLatestVersionToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
             this.compareWithLatestVersionToolStripMenuItem.Text = "Compare with latest version...";
+            this.compareWithLatestVersionToolStripMenuItem.Click += new System.EventHandler(this.compareWithLatestVersionToolStripMenuItem_Click);
             // 
             // compareWithPreviousVersionToolStripMenuItem
             // 
             this.compareWithPreviousVersionToolStripMenuItem.Name = "compareWithPreviousVersionToolStripMenuItem";
             this.compareWithPreviousVersionToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
             this.compareWithPreviousVersionToolStripMenuItem.Text = "Compare with previous version...";
+            this.compareWithPreviousVersionToolStripMenuItem.Click += new System.EventHandler(this.compareWithPreviousVersionToolStripMenuItem_Click);
             // 
             // compareToolStripMenuItem
             // 
             this.compareToolStripMenuItem.Name = "compareToolStripMenuItem";
             this.compareToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
             this.compareToolStripMenuItem.Text = "Compare...";
+            this.compareToolStripMenuItem.Click += new System.EventHandler(this.compareToolStripMenuItem_Click);
             // 
             // TfsHistorySearchWinForm
             // 
@@ -222,7 +227,6 @@
             this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxServerName);
-            this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(615, 361);
             this.Name = "TfsHistorySearchWinForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
