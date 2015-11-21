@@ -22,19 +22,11 @@ namespace TfsHistorySearchUI
         public TfsHistorySearchWinForm(TfsHelper tfsHelper)
         {
             InitializeComponent();
-            try
-            {
-                //Get the server Uri and server path of the selected item 
-                tfsHelper.GetServerUriAndItemPath(out this._serverUri, out this._itemPath, out _isFolder);
-                textBoxServerName.Text = this._serverUri;
-                textBoxFilePath.Text = this._itemPath;
-            }
-            catch (Exception ex)
-            {
-                //throw ex;
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Close();
-            }
+
+            //Get the server Uri and server path of the selected item 
+            tfsHelper.GetServerUriAndItemPath(out this._serverUri, out this._itemPath, out _isFolder);
+            textBoxServerName.Text = this._serverUri;
+            textBoxFilePath.Text = this._itemPath;
         }
 
         #endregion 

@@ -82,9 +82,31 @@ namespace TFSHistorySearch
         /// </summary>
         private void MenuItemCallback(object sender, EventArgs e)
         {
-            DTE2 dte = (DTE2)GetService(typeof(DTE));
-
-            TfsHistorySearchWinForm form = new TfsHistorySearchWinForm(new TfsHelper(dte));
+            try
+            {
+                DTE2 dte = (DTE2)GetService(typeof(DTE));
+                TfsHistorySearchWinForm form = new TfsHistorySearchWinForm(new TfsHelper(dte));
+                form.Show(); //form.ShowDialog();
+            }
+            catch(Exception ex)
+            {
+                //System.Windows.Forms.MessageBox.Show(ex.Message, "Error", System.Windows.Forms.MessageBoxButtons.OK, System.Windows.Forms.MessageBoxIcon.Error);
+                IVsUIShell uiShell = (IVsUIShell)GetService(typeof(SVsUIShell));
+                Guid clsid = Guid.Empty;
+                int result;
+                uiShell.ShowMessageBox(
+                           0,
+                           ref clsid,
+                           "TFS History Search",
+                           ex.Message,
+                           string.Empty, //help file
+                           0,
+                           OLEMSGBUTTON.OLEMSGBUTTON_OK,
+                           OLEMSGDEFBUTTON.OLEMSGDEFBUTTON_FIRST,
+                           OLEMSGICON.OLEMSGICON_INFO,
+                           0,       // false
+                           out result);
+            }
             //// Show a Message Box to prove we were here
             //IVsUIShell uiShell = (IVsUIShell)GetService(typeof(SVsUIShell));
             //Guid clsid = Guid.Empty;

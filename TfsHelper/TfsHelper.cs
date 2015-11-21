@@ -139,7 +139,7 @@ namespace TfsHelperLib
             }
             else
             {
-                throw new TfsHistorySearchException("Operation is not supported for the selected item.");
+                throw new TfsHistorySearchException("Operation is not supported.");
             }
         }
 

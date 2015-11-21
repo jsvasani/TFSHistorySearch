@@ -63,7 +63,7 @@
 
       <Button guid="guidTFSHistorySearchCmdSet" id="cmdIdTfsSearchHistoryCommand" priority="0x0100" type="Button">
         <Parent guid="guidTFSHistorySearchCmdSet" id="MyMenuGroup" />
-        <Icon guid="guidImages" id="bmpPic1" />
+        <Icon guid="guidImages" id="bmpPicSearch" />
         <Strings>
           <ButtonText>TFS History Search</ButtonText>
         </Strings>
