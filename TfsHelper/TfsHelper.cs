@@ -39,7 +39,7 @@ namespace TfsHelperLib
         /// <param name="serverUri">Server Uri</param>
         /// <param name="itemPath">Item path</param>
         /// <param name="isFolder">True if the selected item is a folder</param>
-        public void GetServerUriAndItemPath(DTE2 appObj, out string serverUri, out string itemPath, out bool isFolder)
+        public static void GetServerUriAndItemPath(DTE2 appObj, out string serverUri, out string itemPath, out bool isFolder)
         {
             if (appObj == null)
                 throw new ArgumentNullException("appObj");
@@ -79,8 +79,6 @@ namespace TfsHelperLib
                 if (selectedItems.Length > 1)
                     throw new TfsHistorySearchException("Multiple items selected.");
 
-                if (selectedItems[0].SourceServerPath.Equals("$/"))
-                    throw new TfsHistorySearchException("Operation is not supported for the selected item.");
                 //Take the 1st item
                 itemPath = selectedItems[0].SourceServerPath;
                 isFolder = selectedItems[0].IsFolder;
@@ -97,11 +95,10 @@ namespace TfsHelperLib
 
                 SourceControl2 sc = (SourceControl2)appObj.SourceControl;
 
-                string fileName = String.Empty;
                 if (selectedItem.ProjectItem != null)
                 {
                     //Its a project file
-                    fileName = selectedItem.ProjectItem.Properties.Item("URL").Value.ToString();
+                    string fileName = selectedItem.ProjectItem.Properties.Item("URL").Value.ToString();
                     fileName = Regex.Replace(fileName, "file:///", String.Empty, RegexOptions.IgnoreCase);
                     if (fileName.EndsWith("\\"))
                     {
@@ -121,7 +118,7 @@ namespace TfsHelperLib
                 else if (selectedItem.Project != null)
                 {
                     //Its a project
-                    fileName = selectedItem.Project.FileName;
+                    string fileName = selectedItem.Project.FileName;
                     try
                     {
                         Item item = vcs.GetItem(fileName);
@@ -134,7 +131,26 @@ namespace TfsHelperLib
                 }
                 else
                 {
-                    throw new TfsHistorySearchException("Operation is not supported for the selected item.");
+                    //check if .sln is selected 
+                    if (appObj.ToolWindows != null && appObj.ToolWindows.SolutionExplorer != null && appObj.ToolWindows.SolutionExplorer.SelectedItems != null
+                        && ((object[])appObj.ToolWindows.SolutionExplorer.SelectedItems).Length > 0
+                        && ((EnvDTE.UIHierarchyItem)((object[])appObj.ToolWindows.SolutionExplorer.SelectedItems)[0]).Object is EnvDTE.Solution)
+                    {
+                        string fileName = appObj.SelectedItems.Item(1).DTE.Solution.FullName;
+                        try
+                        {
+                            Item item = vcs.GetItem(fileName);
+                            itemPath = item.ServerItem;
+                        }
+                        catch (Exception ex)
+                        {
+                            throw new TfsHistorySearchException("Item not under source control.", ex);
+                        }
+                    }
+                    else
+                    {
+                        throw new TfsHistorySearchException("Operation is not supported for the selected item.");
+                    }
                 }
             }
             else
