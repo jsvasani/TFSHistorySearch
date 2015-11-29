@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.Linq;
+using System.Data.Linq;
 using TfsHelperLib;
 
 namespace TfsHistorySearchUI
@@ -40,6 +42,7 @@ namespace TfsHistorySearchUI
         /// <param name="e"></param>
         private void buttonSearch_Click(object sender, EventArgs e)
         {
+            buttonSearch.Enabled = false;
             toolStripStatusLabel.Text = "Searching...";
             this.listViewSearchResults.Items.Clear();
             this._currentResult.Clear();
@@ -73,6 +76,7 @@ namespace TfsHistorySearchUI
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Cursor.Current = Cursors.Default;
+            buttonSearch.Enabled = true;
         }
 
         /// <summary>
@@ -193,6 +197,16 @@ namespace TfsHistorySearchUI
             }
         }
 
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Escape)
+            {
+                this.Close();
+                return true;
+            }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         #endregion 
 
         #region Private Methods
@@ -236,24 +250,27 @@ namespace TfsHistorySearchUI
         private static void PopulateListView(ListView listView, List<TfsChangeset> changesets)
         {
             listView.Items.Clear();
-            foreach (var changeset in changesets)
+            if (changesets != null)
             {
-                string comment = String.Empty;
-                //If Comment present then replace
-                if (!String.IsNullOrEmpty(changeset.Comment))
+                foreach (var changeset in changesets.OrderByDescending(c => c.ChangesetId))
                 {
-                    comment = changeset.Comment.Replace("\n", " ");
-                    comment = comment.Replace("\r", String.Empty);
-                }
+                    string comment = String.Empty;
+                    //If Comment present then replace
+                    if (!String.IsNullOrEmpty(changeset.Comment))
+                    {
+                        comment = changeset.Comment.Replace("\n", " ");
+                        comment = comment.Replace("\r", String.Empty);
+                    }
 
-                string[] fields = new string[] {
+                    string[] fields = new string[] {
                                         changeset.ChangesetId.ToString(),
                                         changeset.Owner, 
                                         changeset.CreationDate.ToString(), 
                                         comment
                                         };
-                ListViewItem lvi = new ListViewItem(fields);
-                listView.Items.Add(lvi);
+                    ListViewItem lvi = new ListViewItem(fields);
+                    listView.Items.Add(lvi);
+                }
             }
         }
 

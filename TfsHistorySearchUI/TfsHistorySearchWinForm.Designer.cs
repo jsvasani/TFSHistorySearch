@@ -36,6 +36,10 @@
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.contextMenuResults = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.compareWithLatestVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.compareWithPreviousVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.compareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxFilePath = new System.Windows.Forms.TextBox();
             this.buttonSearch = new System.Windows.Forms.Button();
@@ -43,10 +47,6 @@
             this.textBoxSearch = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.textBoxServerName = new System.Windows.Forms.TextBox();
-            this.contextMenuResults = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.compareWithLatestVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.compareWithPreviousVersionToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.compareToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip.SuspendLayout();
             this.contextMenuResults.SuspendLayout();
             this.SuspendLayout();
@@ -83,7 +83,6 @@
             this.listViewSearchResults.Location = new System.Drawing.Point(0, 84);
             this.listViewSearchResults.Name = "listViewSearchResults";
             this.listViewSearchResults.Size = new System.Drawing.Size(609, 220);
-            this.listViewSearchResults.Sorting = System.Windows.Forms.SortOrder.Descending;
             this.listViewSearchResults.TabIndex = 41;
             this.listViewSearchResults.UseCompatibleStateImageBehavior = false;
             this.listViewSearchResults.View = System.Windows.Forms.View.Details;
@@ -108,6 +107,36 @@
             // 
             this.columnHeader4.Text = "Comment";
             this.columnHeader4.Width = 369;
+            // 
+            // contextMenuResults
+            // 
+            this.contextMenuResults.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.compareWithLatestVersionToolStripMenuItem,
+            this.compareWithPreviousVersionToolStripMenuItem,
+            this.compareToolStripMenuItem});
+            this.contextMenuResults.Name = "contextMenuResults";
+            this.contextMenuResults.Size = new System.Drawing.Size(248, 70);
+            // 
+            // compareWithLatestVersionToolStripMenuItem
+            // 
+            this.compareWithLatestVersionToolStripMenuItem.Name = "compareWithLatestVersionToolStripMenuItem";
+            this.compareWithLatestVersionToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.compareWithLatestVersionToolStripMenuItem.Text = "Compare with latest version...";
+            this.compareWithLatestVersionToolStripMenuItem.Click += new System.EventHandler(this.compareWithLatestVersionToolStripMenuItem_Click);
+            // 
+            // compareWithPreviousVersionToolStripMenuItem
+            // 
+            this.compareWithPreviousVersionToolStripMenuItem.Name = "compareWithPreviousVersionToolStripMenuItem";
+            this.compareWithPreviousVersionToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.compareWithPreviousVersionToolStripMenuItem.Text = "Compare with previous version...";
+            this.compareWithPreviousVersionToolStripMenuItem.Click += new System.EventHandler(this.compareWithPreviousVersionToolStripMenuItem_Click);
+            // 
+            // compareToolStripMenuItem
+            // 
+            this.compareToolStripMenuItem.Name = "compareToolStripMenuItem";
+            this.compareToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
+            this.compareToolStripMenuItem.Text = "Compare...";
+            this.compareToolStripMenuItem.Click += new System.EventHandler(this.compareToolStripMenuItem_Click);
             // 
             // label3
             // 
@@ -183,38 +212,9 @@
             this.textBoxServerName.Size = new System.Drawing.Size(484, 20);
             this.textBoxServerName.TabIndex = 34;
             // 
-            // contextMenuResults
-            // 
-            this.contextMenuResults.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.compareWithLatestVersionToolStripMenuItem,
-            this.compareWithPreviousVersionToolStripMenuItem,
-            this.compareToolStripMenuItem});
-            this.contextMenuResults.Name = "contextMenuResults";
-            this.contextMenuResults.Size = new System.Drawing.Size(248, 70);
-            // 
-            // compareWithLatestVersionToolStripMenuItem
-            // 
-            this.compareWithLatestVersionToolStripMenuItem.Name = "compareWithLatestVersionToolStripMenuItem";
-            this.compareWithLatestVersionToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.compareWithLatestVersionToolStripMenuItem.Text = "Compare with latest version...";
-            this.compareWithLatestVersionToolStripMenuItem.Click += new System.EventHandler(this.compareWithLatestVersionToolStripMenuItem_Click);
-            // 
-            // compareWithPreviousVersionToolStripMenuItem
-            // 
-            this.compareWithPreviousVersionToolStripMenuItem.Name = "compareWithPreviousVersionToolStripMenuItem";
-            this.compareWithPreviousVersionToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.compareWithPreviousVersionToolStripMenuItem.Text = "Compare with previous version...";
-            this.compareWithPreviousVersionToolStripMenuItem.Click += new System.EventHandler(this.compareWithPreviousVersionToolStripMenuItem_Click);
-            // 
-            // compareToolStripMenuItem
-            // 
-            this.compareToolStripMenuItem.Name = "compareToolStripMenuItem";
-            this.compareToolStripMenuItem.Size = new System.Drawing.Size(247, 22);
-            this.compareToolStripMenuItem.Text = "Compare...";
-            this.compareToolStripMenuItem.Click += new System.EventHandler(this.compareToolStripMenuItem_Click);
-            // 
             // TfsHistorySearchWinForm
             // 
+            this.AcceptButton = this.buttonSearch;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(609, 323);
