@@ -41,12 +41,10 @@
          must be a menu. -->
     <Groups>
 
-      <Group guid="guidTFSHistorySearchCmdSet" id="MyMenuGroup" priority="0x0600">
-        <Parent guid="guidSHLMainMenu" id="IDM_VS_MENU_TOOLS"/>
+      <Group guid="guidTFSHistorySearchCmdSet" id="MyMenuGroup" priority="0x0400">
+        <Parent guid="guidSourceControlContextMenu" id="idSourceControlContextMenu"/>
       </Group>
-      
-
-
+     
     </Groups>
     
     <!--Buttons section. -->
@@ -65,11 +63,9 @@
         <Parent guid="guidTFSHistorySearchCmdSet" id="MyMenuGroup" />
         <Icon guid="guidImages" id="bmpPicSearch" />
         <Strings>
-          <ButtonText>TFS History Search</ButtonText>
+          <ButtonText>Search History</ButtonText>
         </Strings>
       </Button>
-
-
 
     </Buttons>
    
@@ -86,7 +82,21 @@
  
   </Commands>
 
+  <CommandPlacements>
 
+    <CommandPlacement guid="guidTFSHistorySearchCmdSet" id="MyMenuGroup" priority="0x0400">
+      <Parent guid="guidSolutionExplorerSourceControlContextMenu" id="idSolutionExplorerItemMenu"/>
+    </CommandPlacement>
+
+    <CommandPlacement guid="guidTFSHistorySearchCmdSet" id="MyMenuGroup" priority="0x0400">
+      <Parent guid="guidSolutionExplorerSourceControlContextMenu" id="idSolutionExplorerSolutionMenu"/>
+    </CommandPlacement>
+
+    <CommandPlacement guid="guidTFSHistorySearchCmdSet" id="MyMenuGroup" priority="0x0400">
+      <Parent guid="guidSolutionExplorerSourceControlContextMenu2" id="idSolutionExplorerProjectMenu"/>
+    </CommandPlacement>
+    
+  </CommandPlacements>
 
 
 
@@ -101,7 +111,18 @@
       <IDSymbol name="cmdIdTfsSearchHistoryCommand" value="0x0100" />
     </GuidSymbol>
     
+    <GuidSymbol name="guidSourceControlContextMenu" value="{FFE1131C-8EA1-4D05-9728-34AD4611BDA9}">
+      <IDSymbol name="idSourceControlContextMenu" value="4113" />
+    </GuidSymbol>
     
+    <GuidSymbol name="guidSolutionExplorerSourceControlContextMenu" value="{5BF14E63-E267-4787-B20B-B814FD043B38}">
+      <IDSymbol name="idSolutionExplorerItemMenu" value="23007" />
+      <IDSymbol name="idSolutionExplorerSolutionMenu" value="23005" />
+    </GuidSymbol>
+
+    <GuidSymbol name="guidSolutionExplorerSourceControlContextMenu2" value="{D309F791-903F-11D0-9EFC-00A0C911004F}">
+      <IDSymbol name="idSolutionExplorerProjectMenu" value="866" />
+    </GuidSymbol>
     
     <GuidSymbol name="guidImages" value="{3024ee73-2e00-4a1a-8436-a892f7a1e271}" >
       <IDSymbol name="bmpPic1" value="1" />
