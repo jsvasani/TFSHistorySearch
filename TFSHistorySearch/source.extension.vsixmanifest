@@ -3,9 +3,13 @@
   <Metadata>
     <Identity Id="8f3b1e9a-9b0f-456c-b9ef-b7b79e9dda7b" Version="1.0" Language="en-US" Publisher="Jagdish Vasani" />
     <DisplayName>TFS History Search</DisplayName>
-    <Description>This package adds free text search feature to search in TFS History for Visual Studio 2013.</Description>
+    <Description xml:space="preserve">Microsoft Visual Studio 2013 extension to allow free text search in TFS History.</Description>
     <MoreInfo>https://github.com/jsvasani/TFSHistorySearch</MoreInfo>
     <License>LICENSE.txt</License>
+    <ReleaseNotes>https://github.com/jsvasani/TFSHistorySearch</ReleaseNotes>
+    <Icon>Resources\search.ico</Icon>
+    <PreviewImage>Resources\preview.jpg</PreviewImage>
+    <Tags>Source Control, TFS, Team Foundation Server, Search</Tags>
   </Metadata>
   <Installation InstalledByMsi="false">
     <InstallationTarget Id="Microsoft.VisualStudio.Pro" Version="[12.0]" />
