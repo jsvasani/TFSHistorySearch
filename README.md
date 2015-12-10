@@ -1,4 +1,4 @@
-# TFSHistorySearch
+# TFS History Search
 Microsoft Visual Studio 2013 extension to allow free text search in TFS History.
 
 </h4>Features</h4>
