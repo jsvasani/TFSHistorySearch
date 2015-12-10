@@ -1,7 +1,6 @@
 # TFS History Search
-Microsoft Visual Studio 2013 extension to allow free text search in TFS History.
+<h3>Microsoft Visual Studio 2013 extension to allow free text search in TFS History.</h3>
 
-</h4>Features</h4>
 TFS History Search provides search within TFS history comments and find a particular change-set instead of traversing the whole list. The extension goes one step forward and facilitates free text search in change-set fields. For example you can use change-set id, username or even date-time as search keywords.
 
 After installing the extension, search option appears in context menu in Solution Explorer as well as Source Control Explorer.
