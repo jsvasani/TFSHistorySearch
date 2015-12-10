@@ -227,6 +227,7 @@ namespace TfsHistorySearchUI
                 string historyRow = changeset.ChangesetId.ToString()
                     + " " + changeset.Owner
                     + " " + changeset.CreationDate.ToLongDateString()
+                    + " " + changeset.CreationDate.ToShortDateString()
                     + " " + changeset.Comment;
 
                 //Check if all the words are present
