@@ -11,5 +11,5 @@ You can install the extension from Tools->Extension->Online and then search for 
 <h4>How to Uninstall</h4>
 You can uninstall the extension from Tools->Extension and Updates
 
-For more info,  <a href="">TFS History Search</a>
+For more info,  <a href="https://visualstudiogallery.msdn.microsoft.com/6dc1be7b-af30-40da-99d5-85a44b6b4717">TFS History Search</a>
 
