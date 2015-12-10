@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TfsHistorySearchWinForm));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.listViewSearchResults = new System.Windows.Forms.ListView();
@@ -227,6 +228,7 @@
             this.Controls.Add(this.textBoxSearch);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxServerName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(615, 361);
             this.Name = "TfsHistorySearchWinForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
