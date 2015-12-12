@@ -53,13 +53,9 @@ namespace TfsHelperLib
             // Get server Uri
             serverUri = wsInfo[0].ServerUri.AbsoluteUri;
 
-            // Get a reference to the Team Foundation Server.
-            TfsTeamProjectCollection tc = new TfsTeamProjectCollection(wsInfo[0].ServerUri);
-            VersionControlServer vcs = tc.GetService(typeof(VersionControlServer)) as VersionControlServer;
-
             //if Active Window is Source Control Explorer
-            if (appObj.ActiveWindow!= null && !String.IsNullOrWhiteSpace(appObj.ActiveWindow.Caption) 
-                && appObj.ActiveWindow.Caption.StartsWith("Source Control Explorer"))
+            if (appObj.ActiveWindow != null && appObj.ActiveWindow.Type == vsWindowType.vsWindowTypeToolWindow 
+                && appObj.ActiveWindow.ObjectKind == "{99B8FA2F-AB90-4F57-9C32-949F146F1914}")
             {
                 VersionControlExt vce;
                 // The top level class used to access all other Team Foundation Version Control Extensiblity classes
@@ -73,27 +69,21 @@ namespace TfsHelperLib
                 // Get all selected items
                 VersionControlExplorerItem[] selectedItems = vce.Explorer.SelectedItems;
 
-                if (selectedItems.Length == 0)
-                    throw new TfsHistorySearchException("You must select one item.");
-
                 if (selectedItems.Length > 1)
-                    throw new TfsHistorySearchException("Multiple items selected.");
+                    throw new TfsHistorySearchException("Multiple items selected. Please select only one item.");
 
                 //Take the 1st item
                 itemPath = selectedItems[0].SourceServerPath;
                 isFolder = selectedItems[0].IsFolder;
             }
             //if Active Window is Solution Explorer
-            else if (appObj.ActiveWindow != null && !String.IsNullOrWhiteSpace(appObj.ActiveWindow.Caption)
-                && appObj.ActiveWindow.Caption.StartsWith("Solution Explorer"))
+            else if (appObj.ActiveWindow != null && appObj.ActiveWindow.Type == vsWindowType.vsWindowTypeSolutionExplorer)
             {
                 isFolder = false;
                 if (appObj.SelectedItems.MultiSelect == true)
-                    throw new TfsHistorySearchException("Multiple items selected.");
+                    throw new TfsHistorySearchException("Multiple items selected. Please select only one item.");
 
                 SelectedItem selectedItem = appObj.SelectedItems.Item(1);
-
-                SourceControl2 sc = (SourceControl2)appObj.SourceControl;
 
                 if (selectedItem.ProjectItem != null)
                 {
@@ -107,6 +97,10 @@ namespace TfsHelperLib
                     }
                     try
                     {
+                        // Get a reference to the Team Foundation Server.
+                        TfsTeamProjectCollection tc = new TfsTeamProjectCollection(wsInfo[0].ServerUri);
+                        VersionControlServer vcs = tc.GetService(typeof(VersionControlServer)) as VersionControlServer;
+
                         Item item = vcs.GetItem(fileName);
                         itemPath = item.ServerItem;
                     }
@@ -121,6 +115,10 @@ namespace TfsHelperLib
                     string fileName = selectedItem.Project.FileName;
                     try
                     {
+                        // Get a reference to the Team Foundation Server.
+                        TfsTeamProjectCollection tc = new TfsTeamProjectCollection(wsInfo[0].ServerUri);
+                        VersionControlServer vcs = tc.GetService(typeof(VersionControlServer)) as VersionControlServer;
+
                         Item item = vcs.GetItem(fileName);
                         itemPath = item.ServerItem;
                     }
@@ -139,6 +137,10 @@ namespace TfsHelperLib
                         string fileName = appObj.SelectedItems.Item(1).DTE.Solution.FullName;
                         try
                         {
+                            // Get a reference to the Team Foundation Server.
+                            TfsTeamProjectCollection tc = new TfsTeamProjectCollection(wsInfo[0].ServerUri);
+                            VersionControlServer vcs = tc.GetService(typeof(VersionControlServer)) as VersionControlServer;
+
                             Item item = vcs.GetItem(fileName);
                             itemPath = item.ServerItem;
                         }
