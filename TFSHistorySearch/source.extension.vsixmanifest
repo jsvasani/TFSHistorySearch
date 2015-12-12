@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <PackageManifest Version="2.0.0" xmlns="http://schemas.microsoft.com/developer/vsx-schema/2011" xmlns:d="http://schemas.microsoft.com/developer/vsx-schema-design/2011">
   <Metadata>
-    <Identity Id="8f3b1e9a-9b0f-456c-b9ef-b7b79e9dda7b" Version="1.0" Language="en-US" Publisher="Jagdish Vasani" />
+    <Identity Id="8f3b1e9a-9b0f-456c-b9ef-b7b79e9dda7b" Version="1.1" Language="en-US" Publisher="Jagdish Vasani" />
     <DisplayName>TFS History Search</DisplayName>
     <Description xml:space="preserve">Microsoft Visual Studio 2013 extension to allow free text search in TFS History.</Description>
     <MoreInfo>https://visualstudiogallery.msdn.microsoft.com/6dc1be7b-af30-40da-99d5-85a44b6b4717</MoreInfo>
